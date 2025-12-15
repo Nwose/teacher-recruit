@@ -22,14 +22,16 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-              <span className="text-[#003366] font-bold text-2xl">T</span>
+            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+              <span className="text-[#003366] font-bold text-2xl">R</span>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white leading-tight">
-                Teachers
+              <h1 className="text-sm md:text-base font-bold text-white leading-tight max-w-xs">
+                Recruitment and Training Hub
               </h1>
-              <p className="text-xs text-white -mt-1">Recruiting Consult</p>
+              <p className="text-xs text-white/80 -mt-1">
+                Professional Services
+              </p>
             </div>
           </Link>
 
@@ -53,7 +55,7 @@ export default function Navbar() {
             className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition"
             aria-label="Open menu"
           >
-            <Menu className="w-7 h-7 text-[#0CE2A8]" />
+            <Menu className="w-7 h-7 text-[#0CE2A8]  hover:text-[#002244]" />
           </button>
         </div>
       </div>
@@ -70,15 +72,15 @@ export default function Navbar() {
           {/* Drawer Panel */}
           <div className="absolute right-0 top-0 h-full w-80 max-w-full bg-white shadow-2xl translate-x-0 transition-transform duration-300 ease-out">
             <div className="flex items-center justify-between p-6 border-b">
-              <div className="w-12 h-12 bg-[#003366] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-2xl">T</span>
+              <div className="w-12 h-12 bg-[#003366] rounded-lg flex items-center justify-center flex-shrink-0">
+                <span className="text-white font-bold text-2xl">R</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-[#003366] leading-tight">
-                  Teachers
+                <h1 className="text-sm md:text-base font-bold text-[#003366] leading-tight max-w-xs">
+                  Recruitment and Training Hub
                 </h1>
-                <p className="text-xs text-[#003366] -mt-1">
-                  Recruiting Consult
+                <p className="text-xs text-[#003366]/80 -mt-1">
+                  Professional Services
                 </p>
               </div>
               <button

@@ -145,7 +145,7 @@ export default function Hero() {
                   <button className="group relative px-6 py-3 rounded-md font-bold bg-[#00D8C1] text-[#003366] hover:brightness-110 transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden">
                     <span className="absolute inset-0 w-0 bg-white transition-all duration-300 ease-out group-hover:w-full opacity-10" />
                     <span className="relative flex items-center justify-center gap-2">
-                      I Need a Teacher/Staff
+                      I Need a Staff
                       <svg
                         className="w-5 h-5 transition-transform group-hover:translate-x-1"
                         fill="none"

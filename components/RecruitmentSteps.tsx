@@ -26,7 +26,7 @@ export default function RecruitmentSteps() {
 
         {useGoogleForm ? (
           <iframe
-            src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true"
+            src="https://docs.google.com/forms/d/e/1FAIpQLScx_U23159sl4Axgkx2P9XFHnv90SgI7b8AWI12OO72FS-fhQ/viewform?usp=header"
             className="w-full min-h-[800px] mt-6 border-none"
             title="Vacancy Submission"
           />
