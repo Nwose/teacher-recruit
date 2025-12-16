@@ -75,7 +75,7 @@ export default function Navbar() {
               <div className="w-12 h-12 bg-[#003366] rounded-lg flex items-center justify-center flex-shrink-0">
                 <span className="text-white font-bold text-2xl">R</span>
               </div>
-              <div>
+              <div className="pl-4">
                 <h1 className="text-sm md:text-base font-bold text-[#003366] leading-tight max-w-xs">
                   Recruitment and Training Hub
                 </h1>
