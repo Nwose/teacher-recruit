@@ -1,23 +1,34 @@
+"use client";
+
 import Link from "next/link";
-import { Phone, Mail, GraduationCap } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+} from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
     { href: "/", label: "Home" },
-    { href: "/for-schools", label: "For Schools" },
-    { href: "/for-teachers", label: "For Teachers" },
-    { href: "/mentorship", label: "Mentorship & Training" },
-    { href: "/about", label: "About Us" },
+    { href: "/teachers-hub", label: "Teachers Hub" },
+    { href: "/general-recruitment", label: "General Recruitment" },
+    { href: "/training", label: "Training" },
+    { href: "/about-us", label: "About Us" },
     { href: "/contact", label: "Contact" },
   ];
 
   const services = [
-    { href: "/for-schools", label: "School Recruitment" },
-    { href: "/for-schools", label: "Organization Recruitment" },
-    { href: "/mentorship", label: "Educator Mentorship" },
-    { href: "/mentorship", label: "Professional Development" },
+    {
+      href: "/general-recruitment",
+      label: "School & Organization Recruitment",
+    },
+    { href: "/training", label: "Professional Training" },
+    { href: "/teachers-hub", label: "Teachers Hub" },
     {
       href: "https://teachersconsult.manatal.careers",
       label: "Job Board",
@@ -25,124 +36,151 @@ export default function Footer() {
     },
   ];
 
+  const socials = [
+    { icon: <Facebook className="w-5 h-5" />, href: "https://facebook.com" },
+    { icon: <Twitter className="w-5 h-5" />, href: "https://twitter.com" },
+    { icon: <Linkedin className="w-5 h-5" />, href: "https://linkedin.com" },
+    { icon: <Instagram className="w-5 h-5" />, href: "https://instagram.com" },
+  ];
+
   return (
-    <footer className="bg-primary text-white">
+    <footer className="bg-[#002244] text-white">
       {/* CTA Section */}
       <div className="border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center">
-            <h3 className="text-3xl md:text-4xl font-bold mb-8 font-['var(--font-poppins)']">
-              Ready to Find Your Next Great Hire or Role?
-            </h3>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link href="/for-schools" className="btn-primary">
-                Submit Your Vacancy Now
-              </Link>
-              <a
-                href="https://teachersconsult.manatal.careers"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary"
-              >
-                Browse Job Openings
-              </a>
-            </div>
+        <div className="max-w-7xl mx-auto px-6 py-16 text-center">
+          <h3 className="text-3xl md:text-4xl font-bold mb-8">
+            Ready to Find Your Next Great Hire or Opportunity?
+          </h3>
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <Link
+              href="/general-recruitment"
+              className="px-6 py-3 bg-[#0CE2A8] text-[#002244] font-semibold rounded-md hover:brightness-110 transition"
+            >
+              Submit a Vacancy
+            </Link>
+            <a
+              href="https://teachersconsult.manatal.careers"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-white text-[#002244] font-semibold rounded-md hover:bg-gray-100 transition"
+            >
+              Browse Job Openings
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Company Info */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <GraduationCap className="w-10 h-10 text-accent-aqua" />
-              <div>
-                <h4 className="text-2xl font-bold font-['var(--font-poppins)']">
-                  Teachers
-                </h4>
-                <p className="text-accent-aqua text-sm">Recruiting Consult</p>
-              </div>
+      {/* Main Footer */}
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        {/* Company Info */}
+        <div className="lg:col-span-2">
+          <div className="flex items-center gap-3 mb-6">
+            {/* Logo */}
+            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+              <span className="text-[#003366] font-bold text-2xl">R</span>
             </div>
-            <p className="text-white/80 mb-6 leading-relaxed max-w-md">
-              Connecting credible educators with top schools through trusted
-              recruitment and mentorship solutions.
-            </p>
-            <div className="space-y-3">
-              <a
-                href="tel:5551234567"
-                className="flex items-center gap-3 text-white/80 hover:text-accent-aqua transition-colors"
-              >
-                <Phone className="w-5 h-5" />
-                <span>(555) 123-4567</span>
-              </a>
-              <a
-                href="mailto:info@teachersrecruiting.com"
-                className="flex items-center gap-3 text-white/80 hover:text-accent-aqua transition-colors"
-              >
-                <Mail className="w-5 h-5" />
-                <span>info@teachersrecruiting.com</span>
-              </a>
+
+            {/* Name */}
+            <div>
+              <h4 className="text-lg font-bold leading-tight">
+                Recruitment and Training Hub
+              </h4>
+              <p className="text-[#0CE2A8] text-sm">Professional Services</p>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-xl font-bold mb-6 font-['var(--font-poppins)']">
-              Quick Links
-            </h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-white/80 hover:text-accent-aqua hover:pl-2 transition-all duration-300 inline-block"
+          <p className="text-white/80 mb-6 leading-relaxed max-w-md">
+            Delivering trusted recruitment and professional training solutions
+            for educators, schools, and organizations.
+          </p>
+
+          <div className="space-y-3 mb-6">
+            <a
+              href="tel:5551234567"
+              className="flex items-center gap-3 text-white/80 hover:text-[#0CE2A8] transition-colors"
+            >
+              <Phone className="w-5 h-5" />
+              <span>(555) 123-4567</span>
+            </a>
+            <a
+              href="mailto:info@recruitmenthub.com"
+              className="flex items-center gap-3 text-white/80 hover:text-[#0CE2A8] transition-colors"
+            >
+              <Mail className="w-5 h-5" />
+              <span>info@recruitmenthub.com</span>
+            </a>
+          </div>
+
+          {/* Social Links */}
+          <div className="flex items-center gap-4">
+            {socials.map((social, idx) => (
+              <a
+                key={idx}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-white/10 rounded-full hover:bg-[#0CE2A8]/30 transition"
+              >
+                {social.icon}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Quick Links */}
+        <div>
+          <h4 className="text-xl font-bold mb-6">Quick Links</h4>
+          <ul className="space-y-3">
+            {quickLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-white/80 hover:text-[#0CE2A8] hover:pl-2 transition-all duration-300 inline-block"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Services */}
+        <div>
+          <h4 className="text-xl font-bold mb-6">Services</h4>
+          <ul className="space-y-3">
+            {services.map((service) => (
+              <li key={service.label}>
+                {service.external ? (
+                  <a
+                    href={service.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/80 hover:text-[#0CE2A8] hover:pl-2 transition-all duration-300 inline-block"
                   >
-                    {link.label}
+                    {service.label}
+                  </a>
+                ) : (
+                  <Link
+                    href={service.href}
+                    className="text-white/80 hover:text-[#0CE2A8] hover:pl-2 transition-all duration-300 inline-block"
+                  >
+                    {service.label}
                   </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="text-xl font-bold mb-6 font-['var(--font-poppins)']">
-              Services
-            </h4>
-            <ul className="space-y-3">
-              {services.map((service) => (
-                <li key={service.label}>
-                  {service.external ? (
-                    <a
-                      href={service.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white/80 hover:text-accent-aqua hover:pl-2 transition-all duration-300 inline-block"
-                    >
-                      {service.label}
-                    </a>
-                  ) : (
-                    <Link
-                      href={service.href}
-                      className="text-white/80 hover:text-accent-aqua hover:pl-2 transition-all duration-300 inline-block"
-                    >
-                      {service.label}
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <p className="text-center text-white/60 text-sm">
-            © {currentYear} Teachers Recruiting Consult. All rights reserved.
+        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-2">
+          <p className="text-white/60 text-sm text-center md:text-left">
+            © {currentYear} Recruitment and Training Hub. All rights reserved.
+          </p>
+          <p className="text-white/60 text-sm text-center md:text-right">
+            Designed by Nwose for Education
           </p>
         </div>
       </div>

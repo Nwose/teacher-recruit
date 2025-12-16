@@ -1,5 +1,7 @@
 import "./globals.css";
 import React from "react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Teachers Recruiting Consult",
@@ -15,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Google fonts - using link for simplicity */}
+        {/* Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -27,7 +29,15 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-slate-50 text-slate-900">{children}</body>
+
+      <body className="bg-slate-50 text-slate-900 antialiased">
+        {/* Global Navbar */}
+        <Navbar />
+
+        {/* Page Content */}
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
