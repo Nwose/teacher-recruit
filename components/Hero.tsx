@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -112,19 +113,19 @@ export default function Hero() {
 
                 {/* CTA BUTTONS */}
                 <div className="flex-shrink-0 flex flex-col sm:flex-row md:flex-col gap-3 w-full sm:w-auto">
-                  <button className="group relative w-full sm:w-auto px-6 py-3 rounded-md font-bold bg-[#00D8C1] text-[#003366] transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl">
-                    <span className="absolute inset-0 w-0 bg-white transition-all duration-300 group-hover:w-full opacity-10" />
-                    <span className="relative flex items-center justify-center gap-2">
-                      I Need a Staff →
-                    </span>
-                  </button>
+                  <Link
+                    href="/general-recruitment"
+                    className="group relative w-full sm:w-auto px-6 py-3 rounded-md font-bold bg-[#00D8C1] text-[#003366] transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl text-center"
+                  >
+                    I Need a Staff →
+                  </Link>
 
-                  <button className="group relative w-full sm:w-auto px-6 py-3 rounded-md font-bold bg-white text-[#003366] transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl">
-                    <span className="absolute inset-0 w-0 bg-[#003366] transition-all duration-300 group-hover:w-full opacity-5" />
-                    <span className="relative flex items-center justify-center gap-2">
-                      I Am a Candidate →
-                    </span>
-                  </button>
+                  <Link
+                    href="/candidate"
+                    className="group relative w-full sm:w-auto px-6 py-3 rounded-md font-bold bg-white text-[#003366] transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl text-center"
+                  >
+                    I Am a Candidate →
+                  </Link>
                 </div>
               </div>
             </div>

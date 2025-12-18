@@ -1,4 +1,5 @@
 import PageShell from "@/components/PageShell";
+import RecruitmentSteps from "@/components/RecruitmentSteps";
 
 export default function GeneralRecruitmentPage() {
   return (
@@ -6,17 +7,13 @@ export default function GeneralRecruitmentPage() {
       title="General Recruitment"
       subtitle="Professional staffing solutions for institutions"
     >
-      <div className="space-y-6 max-w-3xl">
-        <p className="text-slate-600">
+      <div className="space-y-10">
+        <p className="text-slate-600 max-w-3xl">
           We provide end-to-end recruitment services for schools and
           organizations seeking qualified professionals.
         </p>
 
-        <div className="p-6 rounded-xl bg-[#003366]/5 border-l-4 border-[#0CE2A8]">
-          <p className="text-[#003366] font-medium">
-            Trusted recruitment. Quality candidates. Reliable results.
-          </p>
-        </div>
+        <RecruitmentSteps />
       </div>
     </PageShell>
   );
