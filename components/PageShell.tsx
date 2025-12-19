@@ -6,19 +6,39 @@ import React from "react";
 type PageShellProps = {
   title: string;
   subtitle?: string;
+  heroImage?: string;
   children: React.ReactNode;
 };
 
 export default function PageShell({
   title,
   subtitle,
+  heroImage,
   children,
 }: PageShellProps) {
   return (
     <main className="bg-white">
       {/* Hero Header */}
-      <section className="relative overflow-hidden bg-[#003366]">
-        <div className="max-w-7xl mx-auto px-6 py-20 text-center">
+      <section
+        className="relative overflow-hidden"
+        style={
+          heroImage
+            ? {
+                backgroundImage: `url(${heroImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }
+            : undefined
+        }
+      >
+        {/* Fallback / Overlay */}
+        <div
+          className={`absolute inset-0 ${
+            heroImage ? "bg-[#003366]/80" : "bg-[#003366]"
+          }`}
+        />
+
+        <div className="relative max-w-7xl mx-auto px-6 py-20 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

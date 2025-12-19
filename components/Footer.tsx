@@ -46,7 +46,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#002244] text-white">
       {/* CTA Section */}
-      <div className="border-b border-white/10">
+      <div className="border-b border-white/10 bg-[#0CE2A8]">
         <div className="max-w-7xl mx-auto px-6 py-16 text-center">
           <h3 className="text-3xl md:text-4xl font-bold mb-8">
             Ready to Find Your Next Great Hire or Opportunity?
@@ -54,7 +54,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <Link
               href="/general-recruitment"
-              className="px-6 py-3 bg-[#0CE2A8] text-[#002244] font-semibold rounded-md hover:brightness-110 transition"
+              className="px-6 py-3 bg-[#002244] text-[#0CE2A8] font-semibold rounded-md hover:brightness-110 transition"
             >
               Submit a Vacancy
             </Link>

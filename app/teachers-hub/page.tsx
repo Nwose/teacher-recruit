@@ -5,6 +5,7 @@ export default function TeachersHubPage() {
     <PageShell
       title="Teachers Hub"
       subtitle="Resources, opportunities, and support for educators"
+      heroImage="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1600&q=80"
     >
       <div className="grid md:grid-cols-2 gap-10">
         <div className="p-6 bg-slate-50 rounded-xl border">

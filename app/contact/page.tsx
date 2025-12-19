@@ -2,7 +2,11 @@ import PageShell from "@/components/PageShell";
 
 export default function ContactPage() {
   return (
-    <PageShell title="Contact Us" subtitle="Let’s start the conversation">
+    <PageShell
+      title="Contact Us"
+      subtitle="Let’s start the conversation"
+      heroImage="https://images.unsplash.com/photo-1525182008055-f88b95ff7980?auto=format&fit=crop&w=1600&q=80"
+    >
       <div className="max-w-xl">
         <form className="space-y-4">
           <input

@@ -5,6 +5,7 @@ export default function TrainingPage() {
     <PageShell
       title="Training Programs"
       subtitle="Build skills. Advance your career."
+      heroImage="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=1600&q=80"
     >
       {/* Training Google Form Component */}
       <p className="text-slate-600">
