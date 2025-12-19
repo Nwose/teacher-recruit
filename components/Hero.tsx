@@ -96,8 +96,8 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4"
                   >
-                    Connecting Credible Teachers and Admin Officers with Top
-                    Schools
+                    Connecting Credible Professionals with Leading
+                    Organizations.
                   </motion.h2>
 
                   <motion.p

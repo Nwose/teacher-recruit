@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   Phone,
   Mail,
@@ -74,10 +75,16 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         {/* Company Info */}
         <div className="lg:col-span-2">
-          <div className="flex items-center gap-3 mb-6">
+          <Link href="/" className="flex items-center gap-3 mb-6">
             {/* Logo */}
-            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
-              <span className="text-[#003366] font-bold text-2xl">R</span>
+            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <Image
+                src="/rt-logo-40.png"
+                alt="Recruitment and Training Hub Logo"
+                width={40}
+                height={40}
+                className="object-contain"
+              />
             </div>
 
             {/* Name */}
@@ -87,7 +94,7 @@ export default function Footer() {
               </h4>
               <p className="text-[#0CE2A8] text-sm">Professional Services</p>
             </div>
-          </div>
+          </Link>
 
           <p className="text-white/80 mb-6 leading-relaxed max-w-md">
             Delivering trusted recruitment and professional training solutions
