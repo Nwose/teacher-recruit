@@ -11,7 +11,7 @@ export default function HomePage() {
 
       <section className="max-w-7xl mx-auto px-6 py-16 bg-gray-50">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
-          Trusted By Recruitment and Match-making For The Education Sector And
+          Trusted Recruitment and Match-making For The Education Sector And
           Beyond
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
