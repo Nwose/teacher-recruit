@@ -42,21 +42,41 @@ export default function RecruitmentSteps() {
   return (
     <section className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
       {/* LEFT */}
-      <div className="bg-white rounded-xl shadow p-8">
+      <div className="bg-white rounded-xl shadow p-8 flex flex-col">
         <h3 className="font-bold text-lg mb-2">
           Our Seamless Recruitment Process
         </h3>
-        <p className="text-gray-600 text-sm">
+        <p className="text-gray-600 text-sm mb-6">
           Submit your vacancy and let our experts handle screening,
           verification, and placement with speed and accuracy.
         </p>
+
+        {/* IMAGE SLIDER */}
+        <div className="relative mt-auto overflow-hidden rounded-lg h-[550px]">
+          <div className="slider-track">
+            <img
+              src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80"
+              alt="Professional recruitment discussion"
+              className="slider-image"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1400&q=80"
+              alt="Job interview meeting"
+              className="slider-image"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1400&q=80"
+              alt="Corporate hiring team"
+              className="slider-image"
+            />
+          </div>
+        </div>
       </div>
 
       {/* RIGHT */}
       <div className="bg-white rounded-xl shadow p-8">
         <h3 className="font-bold text-lg mb-6">Submit Your Vacancy Now</h3>
 
-        {/* SUCCESS MESSAGE */}
         {success && (
           <div className="mb-6 animate-success rounded-md border border-green-200 bg-green-50 px-4 py-3 text-green-700 font-medium">
             ✅ Submission received successfully. We’ll be in touch shortly.
@@ -67,7 +87,6 @@ export default function RecruitmentSteps() {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 gap-4"
         >
-          {/* Organization Type */}
           <select
             name="entry.1468598155"
             required
@@ -76,11 +95,9 @@ export default function RecruitmentSteps() {
             <option value="" disabled hidden>
               Organization Type
             </option>
-
             <option value="School / Educational Institute">
               School / Educational Institute
             </option>
-
             <option value="General Organization / Corporate">
               General Organization / Corporate
             </option>
@@ -163,7 +180,6 @@ export default function RecruitmentSteps() {
             className="w-full border rounded-md px-4 py-2"
           />
 
-          {/* SUBMIT */}
           <div className="col-span-1 md:col-span-2 flex justify-end">
             <button
               type="submit"
@@ -179,7 +195,6 @@ export default function RecruitmentSteps() {
         </form>
       </div>
 
-      {/* Animation styles */}
       <style jsx>{`
         .animate-success {
           animation: success-pop 0.4s ease-out;
@@ -193,6 +208,38 @@ export default function RecruitmentSteps() {
           100% {
             opacity: 1;
             transform: scale(1);
+          }
+        }
+
+        .slider-track {
+          display: flex;
+          width: 300%;
+          height: 100%;
+          animation: slide 18s infinite ease-in-out;
+        }
+
+        .slider-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          flex-shrink: 0;
+        }
+
+        @keyframes slide {
+          0%,
+          20% {
+            transform: translateX(0%);
+          }
+          33%,
+          53% {
+            transform: translateX(-100%);
+          }
+          66%,
+          86% {
+            transform: translateX(-200%);
+          }
+          100% {
+            transform: translateX(0%);
           }
         }
       `}</style>
