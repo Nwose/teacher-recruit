@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 /* ======================================
    GOOGLE FORM BACKEND
@@ -66,7 +65,6 @@ type SelectProps = {
 ====================================== */
 
 export default function TeacherVettingForm() {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [subjects, setSubjects] = useState<string[]>([]);
 
@@ -97,6 +95,7 @@ export default function TeacherVettingForm() {
 
     const body = new URLSearchParams();
 
+    /* ===== SUBMIT TO GOOGLE FORM ===== */
     body.append("entry.2043138503", paymentRef);
     body.append("entry.1994045145", fullName);
     body.append("entry.563296656", phone);
@@ -117,12 +116,7 @@ export default function TeacherVettingForm() {
       body,
     });
 
-    /* ===== LOG LOCALLY (NO DB) ===== */
-    const logs = JSON.parse(localStorage.getItem("vettingLogs") || "[]");
-    logs.push({ paymentRef, email, submittedAt: new Date().toISOString() });
-    localStorage.setItem("vettingLogs", JSON.stringify(logs));
-
-    /* ===== BUILD PREFILLED UPLOAD LINK ===== */
+    /* ===== BUILD PREFILLED CV UPLOAD LINK ===== */
     const uploadUrl =
       `${GOOGLE_FORM_UPLOAD_URL}?usp=pp_url` +
       `&entry.2043138503=${encodeURIComponent(paymentRef)}` +
@@ -139,8 +133,8 @@ export default function TeacherVettingForm() {
         .map((s) => `&entry.1143964729=${encodeURIComponent(s)}`)
         .join("");
 
-    /* ✅ ONLY ONE REDIRECT */
-    router.push(`/vetting-success?uploadUrl=${encodeURIComponent(uploadUrl)}`);
+    /* ✅ FINAL, RELIABLE REDIRECT */
+    window.location.assign(uploadUrl);
   }
 
   return (
