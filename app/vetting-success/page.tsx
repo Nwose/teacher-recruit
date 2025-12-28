@@ -1,31 +1,36 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import PageShell from "@/components/PageShell";
 
-export default function VettingSuccessPage() {
-  const params = useSearchParams();
-  const uploadUrl = params.get("uploadUrl");
+function VettingSuccessContent() {
+  const searchParams = useSearchParams();
+  const txRef = searchParams.get("tx_ref");
 
   return (
-    <div className="max-w-xl mx-auto mt-20 bg-white shadow-lg rounded-xl p-10 text-center">
-      <h1 className="text-2xl font-bold text-green-600 mb-4">
-        Step 1 Completed Successfully
-      </h1>
+    <PageShell title="Payment Successful" subtitle="Vetting payment received">
+      <p className="text-green-600 font-medium">Your payment was successful.</p>
 
-      <p className="text-gray-700 mb-6">
-        Your details have been saved.
-        <br />
-        Please upload your CV to complete the vetting process.
-      </p>
-
-      {uploadUrl && (
-        <a
-          href={uploadUrl}
-          className="inline-block bg-[#003366] text-white px-6 py-3 rounded-lg font-semibold"
-        >
-          Upload CV Now
-        </a>
+      {txRef && (
+        <p className="mt-4 text-sm text-gray-600">
+          Transaction reference: <strong>{txRef}</strong>
+        </p>
       )}
-    </div>
+    </PageShell>
+  );
+}
+
+export default function VettingSuccessPage() {
+  return (
+    <Suspense
+      fallback={
+        <PageShell title="Loading..." subtitle="Please wait">
+          <p className="text-gray-600">Loading payment status…</p>
+        </PageShell>
+      }
+    >
+      <VettingSuccessContent />
+    </Suspense>
   );
 }
