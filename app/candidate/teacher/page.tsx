@@ -1,30 +1,46 @@
 "use client";
 
+import { Suspense } from "react";
 import PageShell from "@/components/PageShell";
 import TeacherVettingForm from "@/components/TeacherVettingForm";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function TeacherFormPage() {
+function TeacherFormContent() {
   const searchParams = useSearchParams();
+
   const status = searchParams.get("status");
   const txRef = searchParams.get("tx_ref");
 
-  const [allowed, setAllowed] = useState(false);
-
-  useEffect(() => {
-    if (status === "successful" && txRef) {
-      setAllowed(true);
-      localStorage.setItem("teacherVettingPaid", "true");
-    }
+  const paidFromCallback = useMemo(() => {
+    return status === "successful" && !!txRef;
   }, [status, txRef]);
 
-  // ✅ Restore access on refresh
+  const [hydrated, setHydrated] = useState(false);
+  const [paidFromStorage, setPaidFromStorage] = useState(false);
+
+  // Client-only hydration
   useEffect(() => {
-    if (localStorage.getItem("teacherVettingPaid") === "true") {
-      setAllowed(true);
-    }
+    setHydrated(true);
+    setPaidFromStorage(localStorage.getItem("teacherVettingPaid") === "true");
   }, []);
+
+  // Persist successful payment
+  useEffect(() => {
+    if (!hydrated || !paidFromCallback) return;
+    localStorage.setItem("teacherVettingPaid", "true");
+    setPaidFromStorage(true);
+  }, [hydrated, paidFromCallback]);
+
+  const allowed = paidFromCallback || paidFromStorage;
+
+  if (!hydrated) {
+    return (
+      <PageShell title="Loading..." subtitle="Preparing your form">
+        <p className="text-gray-600">Please wait…</p>
+      </PageShell>
+    );
+  }
 
   if (!allowed) {
     return (
@@ -43,5 +59,19 @@ export default function TeacherFormPage() {
     >
       <TeacherVettingForm />
     </PageShell>
+  );
+}
+
+export default function TeacherFormPage() {
+  return (
+    <Suspense
+      fallback={
+        <PageShell title="Loading..." subtitle="Preparing your form">
+          <p className="text-gray-600">Please wait…</p>
+        </PageShell>
+      }
+    >
+      <TeacherFormContent />
+    </Suspense>
   );
 }
