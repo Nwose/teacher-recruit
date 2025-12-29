@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import Script from "next/script";
 import { Open_Sans, Poppins } from "next/font/google";
 
-// ✅ Fonts (better than <link>)
+// Fonts
 const openSans = Open_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "600", "700"],
@@ -20,7 +20,6 @@ const poppins = Poppins({
   display: "swap",
 });
 
-// ✅ Proper Metadata API
 export const metadata: Metadata = {
   title: "Teachers Recruiting Consult",
   description:
@@ -35,19 +34,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${openSans.variable} ${poppins.variable}`}>
       <body className="bg-slate-50 text-slate-900 antialiased">
-        {/* Flutterwave Inline Script */}
+        {/* ✅ Flutterwave Checkout Script (REQUIRED) */}
         <Script
           src="https://checkout.flutterwave.com/v3.js"
           strategy="afterInteractive"
         />
 
-        {/* Global Navbar */}
         <Navbar />
-
-        {/* Page Content */}
         <main className="min-h-screen">{children}</main>
-
-        {/* Global Footer */}
         <Footer />
       </body>
     </html>
