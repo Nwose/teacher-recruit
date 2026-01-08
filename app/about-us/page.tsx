@@ -13,6 +13,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 export default function AboutUsPage() {
   return (
@@ -338,20 +339,30 @@ function Pill({ children }: { children: React.ReactNode }) {
   );
 }
 
-/* ---------------- Motion ---------------- */
+/* ---------------- Motion (Framer Motion v12-safe) ---------------- */
 
-const container = {
+const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+const container: Variants = {
   hidden: { opacity: 0, y: 10 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { staggerChildren: 0.08, duration: 0.4, ease: "easeOut" },
+    transition: {
+      staggerChildren: 0.08,
+      duration: 0.4,
+      ease: EASE_OUT,
+    },
   },
 };
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, y: 10 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, ease: EASE_OUT },
+  },
 };
 
 /* ---------------- Styles ---------------- */
