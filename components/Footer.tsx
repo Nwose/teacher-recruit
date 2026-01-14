@@ -27,20 +27,19 @@ export default function Footer() {
     {
       href: "/general-recruitment",
       label: "School & Organization Recruitment",
+      external: false,
     },
-    { href: "/training", label: "Professional Training" },
-    { href: "/teachers-hub", label: "Teachers Hub" },
-    {
-      href: "https://teachersconsult.manatal.careers",
-      label: "Job Board",
-      external: true,
-    },
+    { href: "/training", label: "Professional Training", external: false },
+    { href: "/teachers-hub", label: "Teachers Hub", external: false },
   ];
 
   const socials = [
     { icon: <Facebook className="w-5 h-5" />, href: "https://facebook.com" },
     { icon: <Twitter className="w-5 h-5" />, href: "https://twitter.com" },
-    { icon: <Linkedin className="w-5 h-5" />, href: "https://linkedin.com" },
+    {
+      icon: <Linkedin className="w-5 h-5" />,
+      href: "https://www.linkedin.com/company/recruitment-and-training-hub/",
+    },
     { icon: <Instagram className="w-5 h-5" />, href: "https://instagram.com" },
   ];
 
@@ -60,8 +59,6 @@ export default function Footer() {
               Submit a Vacancy
             </Link>
             <a
-              href="https://teachersconsult.manatal.careers"
-              target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 bg-white text-[#002244] font-semibold rounded-md hover:bg-gray-100 transition"
             >
@@ -107,14 +104,15 @@ export default function Footer() {
               className="flex items-center gap-3 text-white/80 hover:text-[#0CE2A8] transition-colors"
             >
               <Phone className="w-5 h-5" />
-              <span>(555) 123-4567</span>
+              <span>+234 907 109 1048</span>
+              <span></span>
             </a>
             <a
               href="mailto:info@recruitmenthub.com"
               className="flex items-center gap-3 text-white/80 hover:text-[#0CE2A8] transition-colors"
             >
               <Mail className="w-5 h-5" />
-              <span>info@recruitmenthub.com</span>
+              <span>Contact@recruitmentandtraininghub.com</span>
             </a>
           </div>
 
@@ -185,9 +183,6 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-2">
           <p className="text-white/60 text-sm text-center md:text-left">
             © {currentYear} Recruitment and Training Hub. All rights reserved.
-          </p>
-          <p className="text-white/60 text-sm text-center md:text-right">
-            Designed by Nwose for Education
           </p>
         </div>
       </div>
