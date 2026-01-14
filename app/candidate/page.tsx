@@ -1,69 +1,61 @@
+// app/candidate/page.tsx
 "use client";
 
 import PageShell from "@/components/PageShell";
-import Script from "next/script";
+import { motion } from "framer-motion";
 
-declare global {
-  interface Window {
-    FlutterwaveCheckout: any;
-  }
-}
+const FORM_SRC =
+  "https://docs.google.com/forms/d/e/1FAIpQLSdVORBwjU3nr3AcKi9LVIrLbhTmROOsTp49iOpVFyr_9o_-Pw/viewform?embedded=true";
 
-export default function CandidatePaymentPage() {
-  const handlePayment = () => {
-    if (!window.FlutterwaveCheckout) {
-      alert("Payment system failed to load. Please refresh the page.");
-      return;
-    }
-
-    const txRef = `teacher-vetting-${Date.now()}`;
-
-    window.FlutterwaveCheckout({
-      public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY,
-      tx_ref: txRef,
-      amount: 4000,
-      currency: "NGN",
-      payment_options: "card,banktransfer,ussd",
-      redirect_url: `${window.location.origin}/candidate/teacher?status=successful&tx_ref=${txRef}`,
-      customer: {
-        email: "teacher@example.com",
-        phone_number: "08000000000",
-        name: "Teacher Vetting",
-      },
-      customizations: {
-        title: "Teacher Vetting Fee",
-        description: "One-time vetting payment",
-      },
-    });
-  };
-
+export default function CandidatePage() {
   return (
-    <>
-      {/* ✅ LOAD FLUTTERWAVE SCRIPT HERE (CRITICAL FIX) */}
-      <Script
-        src="https://checkout.flutterwave.com/v3.js"
-        strategy="afterInteractive"
-      />
+    <PageShell
+      title="Candidate Application"
+      subtitle="Fill out the form below to join our talent network"
+    >
+      <div className="relative mx-auto w-full max-w-6xl px-4">
+        {/* Soft glows */}
+        <div className="pointer-events-none absolute -top-10 left-1/2 h-56 w-[40rem] -translate-x-1/2 rounded-full bg-[#0CE2A8]/12 blur-3xl" />
+        <div className="pointer-events-none absolute top-28 right-0 h-72 w-72 rounded-full bg-[#002244]/10 blur-3xl" />
 
-      <PageShell
-        title="Teacher Vetting"
-        subtitle="Pay once to continue your application"
-      >
-        <div className="max-w-xl space-y-4">
-          <p className="text-slate-600">
-            A one-time <strong>₦4,000</strong> vetting fee is required before
-            proceeding.
-          </p>
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+        >
+          {/* Header bar */}
+          <div className="flex flex-col gap-1 border-b border-slate-200 bg-slate-50 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <div className="text-sm font-semibold text-[#002244]">
+                Candidate Application Form
+              </div>
+              <div className="mt-1 text-xs text-slate-600">
+                Please complete all required fields and submit when finished.
+              </div>
+            </div>
+          </div>
 
-          <button
-            type="button"
-            onClick={handlePayment}
-            className="bg-[#0CE2A8] text-[#003366] px-6 py-3 rounded-md font-semibold hover:scale-105 transition"
-          >
-            Pay ₦4,000 & Continue
-          </button>
-        </div>
-      </PageShell>
-    </>
+          {/* Visible form area */}
+          <div className="w-full">
+            <div className="w-full overflow-hidden">
+              <iframe
+                title="Candidate Application Form"
+                src={FORM_SRC}
+                className="w-full border-0"
+                style={{
+                  height: "350px", // reduced from 950px
+                }}
+                loading="lazy"
+              />
+            </div>
+
+            <div className="border-t border-slate-200 bg-white px-6 py-4" />
+          </div>
+        </motion.div>
+
+        <div className="h-8" />
+      </div>
+    </PageShell>
   );
 }
