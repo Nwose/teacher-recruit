@@ -40,7 +40,7 @@ export default function RecruitmentSteps() {
   }
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
       {/* LEFT */}
       <div className="bg-white rounded-xl shadow p-8 flex flex-col">
         <h3 className="font-bold text-lg mb-2">
