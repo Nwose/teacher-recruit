@@ -63,12 +63,11 @@ export default function TrainingPage() {
           data-tally-src={TALLY_URL}
           loading="lazy"
           width="100%"
-          height="1871"
           frameBorder="0"
           marginHeight={0}
           marginWidth={0}
           title="Professional Training & Development Interest Form - Recruitment and Training Hub"
-          className="w-full border-0"
+          className="w-full border-0 min-h-[700px]"
         />
       </div>
     </PageShell>

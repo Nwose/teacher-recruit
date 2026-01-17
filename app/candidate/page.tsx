@@ -4,10 +4,30 @@
 import PageShell from "@/components/PageShell";
 import { motion } from "framer-motion";
 import Script from "next/script";
+import { useEffect } from "react";
 
-const TALLY_SRC = "https://tally.so/r/Pd9GYV?transparentBackground=1";
+declare global {
+  interface Window {
+    Tally?: {
+      loadEmbeds: () => void;
+    };
+  }
+}
+
+// Use embed + dynamic height
+const TALLY_SRC =
+  "https://tally.so/embed/Pd9GYV?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1";
 
 export default function CandidatePage() {
+  useEffect(() => {
+    // Run on mount
+    window.Tally?.loadEmbeds?.();
+
+    // Run again shortly after layout settles (helps with framer/layout shifts)
+    const t = window.setTimeout(() => window.Tally?.loadEmbeds?.(), 350);
+    return () => window.clearTimeout(t);
+  }, []);
+
   return (
     <PageShell
       title="Candidate Vetting & Application"
@@ -16,9 +36,11 @@ export default function CandidatePage() {
       <Script
         src="https://tally.so/widgets/embed.js"
         strategy="afterInteractive"
+        onLoad={() => window.Tally?.loadEmbeds?.()}
       />
 
-      <div className="relative mx-auto w-full max-w-6xl px-3 sm:px-6">
+      {/* Prevent horizontal scroll caused by big glow elements */}
+      <div className="relative mx-auto w-full max-w-6xl px-3 sm:px-6 overflow-x-hidden">
         {/* Soft glows */}
         <div className="pointer-events-none absolute -top-10 left-1/2 h-56 w-[40rem] -translate-x-1/2 rounded-full bg-[#0CE2A8]/12 blur-3xl" />
         <div className="pointer-events-none absolute top-28 right-0 h-72 w-72 rounded-full bg-[#002244]/10 blur-3xl" />
@@ -27,6 +49,8 @@ export default function CandidatePage() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          // Trigger Tally sizing once the animation finishes
+          onAnimationComplete={() => window.Tally?.loadEmbeds?.()}
           className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
         >
           {/* Decorative top accent */}
@@ -55,26 +79,22 @@ export default function CandidatePage() {
               {/* subtle inner frame */}
               <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-slate-900/5" />
 
-              {/* iframe sizing */}
-              <div className="relative h-[75vh] min-h-[620px] w-full">
-                <iframe
-                  data-tally-src={TALLY_SRC}
-                  title="Candidate Vetting & Application - Recruitment and Training Hub"
-                  className="absolute inset-0 h-full w-full border-0"
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  marginHeight={0}
-                  marginWidth={0}
-                  allow="fullscreen"
-                />
-              </div>
+              {/* IMPORTANT:
+                  - No fixed h-[75vh] wrapper (can cause clipping / nested scroll weirdness)
+                  - No scrolling="no" so user can always reach bottom if resize is imperfect
+                */}
+              <iframe
+                src={TALLY_SRC}
+                data-tally-src={TALLY_SRC}
+                title="Candidate Vetting & Application - Recruitment and Training Hub"
+                className="relative block w-full border-0 min-h-[800px]"
+                width="100%"
+                frameBorder="0"
+                marginHeight={0}
+                marginWidth={0}
+                allow="fullscreen"
+              />
             </div>
-
-            {/* <p className="mt-3 text-center text-xs text-slate-500">
-              Tip: For the best look, match the form theme inside Tally to your
-              brand colors (#0CE2A8 / #002244).
-            </p> */}
           </div>
         </motion.div>
 
