@@ -1,147 +1,170 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import Script from "next/script";
+
+declare global {
+  interface Window {
+    Tally?: {
+      loadEmbeds: () => void;
+    };
+  }
+}
 
 export default function RecruitmentSteps() {
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const TALLY_URL =
+    "https://tally.so/embed/obRxDx?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1";
 
   useEffect(() => {
-    if (!success) return;
-    const timer = setTimeout(() => setSuccess(false), 4000);
-    return () => clearTimeout(timer);
-  }, [success]);
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setLoading(true);
-    setSuccess(false);
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    const GOOGLE_FORM_ACTION_URL =
-      "https://docs.google.com/forms/d/e/1FAIpQLScx_U23159sl4Axgkx2P9XFHnv90SgI7b8AWI12OO72FS-fhQ/formResponse";
-
-    try {
-      await fetch(GOOGLE_FORM_ACTION_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: formData,
-      });
-
-      setSuccess(true);
-      form.reset();
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }
+    // Ensures Tally initializes after client-side navigation (no refresh needed)
+    window.Tally?.loadEmbeds?.();
+  }, []);
 
   return (
-    <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-      {/* LEFT */}
-      <div className="bg-white rounded-xl shadow p-8 flex flex-col">
-        <h3 className="font-bold text-lg mb-2">
-          Our Seamless Recruitment Process
-        </h3>
-        <p className="text-gray-600 text-sm mb-6">
-          Submit your vacancy and let our experts handle screening,
-          verification, and placement with speed and accuracy.
-        </p>
+    <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-12">
+      {/* ✅ Load Tally embed script */}
+      <Script
+        src="https://tally.so/widgets/embed.js"
+        strategy="afterInteractive"
+        onLoad={() => window.Tally?.loadEmbeds?.()}
+        onError={() => {
+          // Fallback: if script fails, iframe still loads via src
+        }}
+      />
 
-        {/* IMAGE SLIDER */}
-        <div className="relative mt-auto overflow-hidden rounded-lg h-[550px]">
-          <div className="slider-track">
-            <img
-              src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80"
-              alt="Professional recruitment discussion"
-              className="slider-image"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1400&q=80"
-              alt="Job interview meeting"
-              className="slider-image"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1400&q=80"
-              alt="Corporate hiring team"
-              className="slider-image"
-            />
+      {/* Header */}
+      <div className="mb-8">
+        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#002244]">
+          Submit Your Vacancy
+        </h2>
+        <p className="mt-2 max-w-2xl text-sm sm:text-base text-slate-600">
+          Fill out the form below and we’ll handle screening, verification, and
+          placement with speed and accuracy.
+        </p>
+      </div>
+
+      {/* Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+        {/* LEFT */}
+        <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+          <div className="px-6 py-5 bg-slate-50 border-b border-slate-200">
+            <div className="text-sm font-semibold text-[#002244]">
+              Our Seamless Recruitment Process
+            </div>
+            <div className="mt-1 text-xs text-slate-600">
+              What you get when you submit a vacancy
+            </div>
+          </div>
+
+          <div className="p-6">
+            <ul className="space-y-4">
+              <li className="flex gap-3">
+                <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#0CE2A8]/15 text-[#002244] font-bold">
+                  1
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-[#002244]">
+                    Role intake & requirements
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    We confirm job details, expectations, timeline, and
+                    compensation range.
+                  </p>
+                </div>
+              </li>
+
+              <li className="flex gap-3">
+                <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#0CE2A8]/15 text-[#002244] font-bold">
+                  2
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-[#002244]">
+                    Shortlisting & verification
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    Screening, background checks (where applicable), and
+                    candidate validation.
+                  </p>
+                </div>
+              </li>
+
+              <li className="flex gap-3">
+                <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#0CE2A8]/15 text-[#002244] font-bold">
+                  3
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-[#002244]">
+                    Interview coordination
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    We schedule interviews and share notes so you move fast with
+                    confidence.
+                  </p>
+                </div>
+              </li>
+
+              <li className="flex gap-3">
+                <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#0CE2A8]/15 text-[#002244] font-bold">
+                  4
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-[#002244]">
+                    Placement support
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    Offer support, onboarding coordination, and post-placement
+                    follow up.
+                  </p>
+                </div>
+              </li>
+            </ul>
+
+            <div className="mt-6 overflow-hidden rounded-xl border border-slate-200">
+              <img
+                src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80"
+                alt="Professional recruitment discussion"
+                className="h-48 w-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT: Form card */}
+        <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+          <div className="px-6 py-5 bg-slate-50 border-b border-slate-200 flex items-start justify-between gap-3">
+            <div>
+              <div className="text-sm font-semibold text-[#002244]">
+                Client Vacancy Submission
+              </div>
+              <div className="mt-1 text-xs text-slate-600">
+                Complete the form below.
+              </div>
+            </div>
+
+            <span className="shrink-0 inline-flex items-center rounded-full border border-[#0CE2A8]/30 bg-[#0CE2A8]/10 px-3 py-1 text-xs font-semibold text-[#002244]">
+              Secure Form
+            </span>
+          </div>
+
+          {/* ✅ Let the page scroll naturally */}
+          <div className="p-3 sm:p-4">
+            <div className="w-full rounded-xl border border-slate-200 overflow-hidden bg-white">
+              <iframe
+                src={TALLY_URL}
+                data-tally-src={TALLY_URL}
+                title="Client Vacancy Submission - Recruitment and Training Hub"
+                className="w-full border-0"
+                loading="lazy"
+                style={{ minHeight: 900 }}
+              />
+            </div>
+
+            <p className="mt-3 text-center text-xs text-slate-500">
+              Scroll down the page to continue through the form.
+            </p>
           </div>
         </div>
       </div>
-
-      {/* RIGHT */}
-      <div className="bg-white rounded-xl shadow p-8 flex flex-col">
-        <h3 className="font-bold text-lg mb-6">Submit Your Vacancy Now</h3>
-
-        {/* Make iframe area match left side visual height */}
-        <div className="w-full overflow-hidden rounded-lg border flex-1 min-h-[550px]">
-          <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSd4mJK163-MoMpDOpYqo-ZHHbvBECc964GB1JPgNqUEdHNLCg/viewform?embedded=true"
-            title="Vacancy Submission Form"
-            className="w-full h-full"
-            frameBorder="0"
-            marginHeight={0}
-            marginWidth={0}
-          >
-            Loading…
-          </iframe>
-        </div>
-
-        {/* Nice “back to site” message/link */}
-      </div>
-
-      <style jsx>{`
-        .animate-success {
-          animation: success-pop 0.4s ease-out;
-        }
-
-        @keyframes success-pop {
-          0% {
-            opacity: 0;
-            transform: scale(0.95);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-
-        .slider-track {
-          display: flex;
-          width: 300%;
-          height: 100%;
-          animation: slide 18s infinite ease-in-out;
-        }
-
-        .slider-image {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          flex-shrink: 0;
-        }
-
-        @keyframes slide {
-          0%,
-          20% {
-            transform: translateX(0%);
-          }
-          33%,
-          53% {
-            transform: translateX(-100%);
-          }
-          66%,
-          86% {
-            transform: translateX(-200%);
-          }
-          100% {
-            transform: translateX(0%);
-          }
-        }
-      `}</style>
     </section>
   );
 }

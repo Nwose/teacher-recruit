@@ -2,25 +2,43 @@
 
 import PageShell from "@/components/PageShell";
 import Script from "next/script";
+import { useEffect } from "react";
+
+declare global {
+  interface Window {
+    Tally?: {
+      loadEmbeds: () => void;
+    };
+  }
+}
 
 /* ======================================
    ✅ EMBEDDED TALLY FORM (TRAINING)
 ====================================== */
 
-const TALLY_SRC =
+const TALLY_URL =
   "https://tally.so/embed/Pd9G8b?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1";
 
 export default function TrainingPage() {
+  useEffect(() => {
+    // Ensures Tally initializes after client-side navigation (no refresh needed)
+    window.Tally?.loadEmbeds?.();
+  }, []);
+
   return (
     <PageShell
       title="Training Programs"
       subtitle="Build skills. Advance your career."
       heroImage="https://images.unsplash.com/photo-1513258496099-48168024aec0"
     >
-      {/* ✅ Tally embed script (Next.js replacement for the inline <script> snippet) */}
+      {/* ✅ Tally embed script + onLoad init */}
       <Script
         src="https://tally.so/widgets/embed.js"
         strategy="afterInteractive"
+        onLoad={() => window.Tally?.loadEmbeds?.()}
+        onError={() => {
+          // If script fails, iframe still loads via src below
+        }}
       />
 
       <p className="text-slate-600 max-w-2xl mb-8">
@@ -28,9 +46,8 @@ export default function TrainingPage() {
         programs. We’ll notify you when relevant courses are available.
       </p>
 
-      {/* ✅ EMBEDDED TALLY FORM (replaces Google Form) */}
       <div className="max-w-3xl bg-white rounded-xl shadow-lg overflow-hidden">
-        {/* Header strip (keeps it looking like your site) */}
+        {/* Header strip */}
         <div className="border-b bg-slate-50 px-6 py-4">
           <h3 className="text-sm font-semibold text-[#003366]">
             Training Interest Registration
@@ -40,9 +57,10 @@ export default function TrainingPage() {
           </div>
         </div>
 
-        {/* The exact Tally iframe you provided (height included) */}
+        {/* ✅ Set src immediately (so it loads without refresh) + keep data-tally-src */}
         <iframe
-          data-tally-src={TALLY_SRC}
+          src={TALLY_URL}
+          data-tally-src={TALLY_URL}
           loading="lazy"
           width="100%"
           height="1871"

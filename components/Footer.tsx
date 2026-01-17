@@ -43,12 +43,25 @@ export default function Footer() {
     { icon: <Instagram className="w-5 h-5" />, href: "https://instagram.com" },
   ];
 
+  // ✅ Add as many numbers as you want here
+  const phones = [
+    {
+      value: "+234 907 109 1048",
+      href: "tel:+2349071091048",
+    },
+    {
+      value: "+234 708 236 1613",
+      href: "tel:+234 708 236 1613",
+    },
+    { value: "+234 816 741 6920", href: "tel:+234 816 741 6920" },
+  ];
+
   return (
     <footer className="bg-[#002244] text-white">
       {/* CTA Section */}
       <div className="border-b border-white/10 bg-[#0CE2A8]">
         <div className="max-w-7xl mx-auto px-6 py-16 text-center">
-          <h3 className="text-3xl md:text-4xl font-bold mb-8">
+          <h3 className="text-3xl md:text-4xl font-bold mb-8 text-[#002244]">
             Ready to Find Your Next Great Hire or Opportunity?
           </h3>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
@@ -59,7 +72,7 @@ export default function Footer() {
               Submit a Vacancy
             </Link>
             <a
-              rel="noopener noreferrer"
+              href="/jobs"
               className="px-6 py-3 bg-white text-[#002244] font-semibold rounded-md hover:bg-gray-100 transition"
             >
               Browse Job Openings
@@ -98,21 +111,48 @@ export default function Footer() {
             for educators, schools, and organizations.
           </p>
 
-          <div className="space-y-3 mb-6">
+          {/* ✅ Contact Cards (supports multiple phone numbers nicely) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+            {phones.map((p) => (
+              <a
+                key={p.value}
+                href={p.href}
+                className="group rounded-xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 transition"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 rounded-lg bg-[#0CE2A8]/15 p-2 text-[#0CE2A8]">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-semibold text-white/70">
+                      Phone
+                    </div>
+                    <div className="mt-1 text-sm font-semibold text-white group-hover:text-[#0CE2A8] transition-colors">
+                      {p.value}
+                    </div>
+                  </div>
+                </div>
+              </a>
+            ))}
+
+            {/* Email card spans full width on small screens for balance */}
             <a
-              href="tel:5551234567"
-              className="flex items-center gap-3 text-white/80 hover:text-[#0CE2A8] transition-colors"
+              href="mailto:Contact@recruitmentandtraininghub.com"
+              className="group sm:col-span-2 rounded-xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 transition"
             >
-              <Phone className="w-5 h-5" />
-              <span>+234 907 109 1048</span>
-              <span></span>
-            </a>
-            <a
-              href="mailto:info@recruitmenthub.com"
-              className="flex items-center gap-3 text-white/80 hover:text-[#0CE2A8] transition-colors"
-            >
-              <Mail className="w-5 h-5" />
-              <span>Contact@recruitmentandtraininghub.com</span>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 rounded-lg bg-[#0CE2A8]/15 p-2 text-[#0CE2A8]">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-semibold text-white/70">
+                    Email
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-white group-hover:text-[#0CE2A8] transition-colors break-all">
+                    Contact@recruitmentandtraininghub.com
+                  </div>
+                </div>
+              </div>
             </a>
           </div>
 
